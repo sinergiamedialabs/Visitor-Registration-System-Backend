@@ -1,4 +1,9 @@
 package com.simelabs.vrs.impl;
 
-public class VisitorRegistrationImpl {
+import com.simelabs.vrs.service.VisitorRegistrationService;
+import org.springframework.stereotype.Service;
+
+@Service
+public class VisitorRegistrationImpl implements VisitorRegistrationService {
+
 }
