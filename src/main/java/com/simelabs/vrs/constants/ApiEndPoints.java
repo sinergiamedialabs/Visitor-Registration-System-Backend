@@ -4,7 +4,7 @@ public class ApiEndPoints {
 
 	public static final String GET_MASTER = "/getAll";
 
-	public static final String SAVE_VISITS ="saveVisits";
+	public static final String SAVE_VISITS = "saveVisits";
 
 	public static final String GET_INVITEES_BY_ID = "/getInviteById";
 
