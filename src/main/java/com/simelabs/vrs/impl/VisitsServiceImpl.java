@@ -20,37 +20,39 @@ public class VisitsServiceImpl implements VisitsService {
 
     @Override
     public VisitsModel saveVisits(VisitsRequest request) {
-        InviteesEntity inviteesEntity = inviteesRepository.findById((long) request.getInvitees_id())
+        InviteesEntity inviteesEntity = inviteesRepository.findById(request.getInvitees_id())
                 .orElseThrow(() -> new IllegalArgumentException("Invitees not found"));
 
-        if (request.isAccepted()) {
+        if (request.isAccepted() == true) {
             VisitesEntity visitesEntity = new VisitesEntity();
             visitesEntity.setInvitees(inviteesEntity);
             visitesEntity.setBarcode(request.getBarCode());
 
             VisitesEntity savedVisit = visitesRepository.save(visitesEntity);
 
-            inviteesEntity.setStatus("true");
+            inviteesEntity.setStatus(true);
             inviteesRepository.save(inviteesEntity);
 
             return mapToVisitsResponse(savedVisit);
         } else {
 
-            inviteesEntity.setStatus("true");
+            inviteesEntity.setStatus(true);
             inviteesRepository.save(inviteesEntity);
 
-            return null; // Or an empty model, depending on your requirements
+            VisitsModel response = new VisitsModel();
+            response.setBarcode("Invitee status updated but visit not saved");
+            return response;
         }
     }
 
     private VisitsModel mapToVisitsResponse(VisitesEntity visitesEntity) {
         VisitsModel visitsModel = new VisitsModel();
-        // Assuming VisitsModel has these setters
-//        visitsModel.setId(visitesEntity.getId());
+
+        visitsModel.setId(visitesEntity.getId());
         visitsModel.setBarcode(visitesEntity.getBarcode());
-//        visitsModel.setInviteesId(visitesEntity.getInvitees().getId());
-        // Map other fields as needed
+
         return visitsModel;
     }
 }
+
 

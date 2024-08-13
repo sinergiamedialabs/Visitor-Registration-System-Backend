@@ -5,7 +5,7 @@ import lombok.Data;
 @Data
 public class VisitsModel {
 
-    private int id;
+    private long id;
 
     private String barcode;
 

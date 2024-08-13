@@ -34,23 +34,8 @@ import java.util.Map;
 @Log4j2
 public class VisitorRegistrationController {
 
-    @Autowired
-    VisitsServiceImpl visitsService;
-
-//    @PostMapping(value = ApiEndPoints.SAVE_VISITS, produces = MediaType.APPLICATION_JSON_VALUE)
-//    public ResponseEntity<BaseResponse<VisitsModel>> saveVisits(@Valid @RequestBody VisitsRequest visitsRequest) {
-//        BaseResponse<VisitsModel> baseResponse;
-//    try{
-//        visitsService.
-//
-//    }
-//    }
-//    catch(){
-//
-//        }
 	@Autowired
 	private UserService userService;
-
 	@Autowired
 	private VenueService venueService;
 
@@ -59,6 +44,25 @@ public class VisitorRegistrationController {
 
 	@Autowired
 	private ResponseUtils responseUtils;
+    @Autowired
+    VisitsServiceImpl visitsService;
+
+    @PostMapping(value = ApiEndPoints.SAVE_VISITS, produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<BaseResponse<VisitsModel>> saveVisits(@RequestBody VisitsRequest visitsRequest) {
+        BaseResponse<VisitsModel> baseResponse;
+		VisitsModel entities = visitsService.saveVisits(visitsRequest);
+		if (entities != null) {
+			baseResponse = responseUtils.setBaseResponse(entities, MessageCodes.API_SUCCESS_MESSAGE_CODE,
+					MessageCodes.API_SUCCESS_MESSAGE, true);
+		}
+		else {
+			baseResponse = responseUtils.setBaseResponse(null, MessageCodes.API_ERROR_MESSAGE_CODE,
+					MessageCodes.NO_DATA_FOUND_MESSAGE, true);
+
+		}
+		return new ResponseEntity<>(baseResponse, HttpStatus.OK);
+	}
+
 
 	@GetMapping(value = ApiEndPoints.GET_MASTER, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<BaseResponse<Map<String, Object>>> getAll() {

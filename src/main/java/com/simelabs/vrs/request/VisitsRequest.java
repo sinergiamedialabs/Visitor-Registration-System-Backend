@@ -5,11 +5,11 @@ import lombok.Data;
 @Data
 public class VisitsRequest {
 
-    private int invitees_id;
+    private long invitees_id;
 
     private String barCode;
 
-    private boolean isAccepted;
+    private boolean accepted;
 
 }
 
