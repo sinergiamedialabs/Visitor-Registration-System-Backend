@@ -17,7 +17,7 @@ public class UserEntity {
 	private Long id;
 
 	@Column(name = "fullname", nullable = false)
-	private String fullname;
+	private String fullName;
 
 	@Column(name = "email", nullable = false, unique = true)
 	private String email;

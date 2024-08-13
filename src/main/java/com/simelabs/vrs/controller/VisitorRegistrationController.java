@@ -5,9 +5,12 @@ import com.simelabs.vrs.constants.MessageCodes;
 import com.simelabs.vrs.entity.EventEntity;
 import com.simelabs.vrs.entity.UserEntity;
 import com.simelabs.vrs.entity.VenueEntity;
+import com.simelabs.vrs.model.InviteesModel;
+import com.simelabs.vrs.request.InviteesRequest;
 import com.simelabs.vrs.response.BaseResponse;
 import com.simelabs.vrs.response.ResponseUtils;
 import com.simelabs.vrs.service.EventService;
+import com.simelabs.vrs.service.InviteesService;
 import com.simelabs.vrs.service.UserService;
 import com.simelabs.vrs.service.VenueService;
 import lombok.extern.log4j.Log4j2;
@@ -16,6 +19,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.HashMap;
@@ -25,6 +30,9 @@ import java.util.Map;
 @RestController
 @Log4j2
 public class VisitorRegistrationController {
+
+	@Autowired
+	InviteesService inviteesService;
 
 	@Autowired
 	private UserService userService;
@@ -62,6 +70,13 @@ public class VisitorRegistrationController {
 		}
 
 		return new ResponseEntity<>(baseResponse, HttpStatus.OK);
+	}
+
+	@PostMapping(value = ApiEndPoints.POST_INVITEES, produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<InviteesModel> createInvitees(@RequestBody InviteesRequest inviteesRequest) {
+		InviteesModel inviteesModel = inviteesService.createInvitees(inviteesRequest);
+		return new ResponseEntity<>(inviteesModel, HttpStatus.CREATED);
+
 	}
 
 }

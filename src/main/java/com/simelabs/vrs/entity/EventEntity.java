@@ -17,6 +17,6 @@ public class EventEntity {
 	private Long id;
 
 	@Column(name = "event_name")
-	private String eventName;
+	private String name;
 
 }
