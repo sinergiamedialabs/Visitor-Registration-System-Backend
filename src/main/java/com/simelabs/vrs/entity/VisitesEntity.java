@@ -19,5 +19,4 @@ public class VisitesEntity {
 
     @Column(name = "barcode", nullable = false)
     private String barcode;
-
 }
