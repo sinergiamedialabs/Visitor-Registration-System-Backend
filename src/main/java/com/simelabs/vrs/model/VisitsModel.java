@@ -7,8 +7,10 @@ import lombok.Data;
 @Data
 public class VisitsModel {
 
-    private Long id;
-    private Long inviteesId;
-    private String barcode;
+	private long id;
+
+	private String barcode;
+
+	private InviteesModel invitees;
 
 }

@@ -1,5 +1,6 @@
 package com.simelabs.vrs.impl;
 
+import com.simelabs.vrs.constants.MessageCodes;
 import com.simelabs.vrs.entity.EventEntity;
 import com.simelabs.vrs.entity.InviteesEntity;
 import com.simelabs.vrs.entity.UserEntity;
@@ -21,7 +22,6 @@ import java.util.Optional;
 
 @Service
 public class InviteesServiceImpl implements InviteesService {
-
     @Autowired
     UserRepository userRepository;
 
@@ -33,6 +33,16 @@ public class InviteesServiceImpl implements InviteesService {
 
     @Autowired
     InviteesRepository inviteesRepository;
+
+	@Autowired
+	private InviteesRepository inviteesRepository;
+
+	@Override
+	public InviteesEntity getInviteeById(Long id) {
+		return inviteesRepository.findById(id)
+				.orElseThrow(() -> new RuntimeException(MessageCodes.NO_DATA_FOUND_MESSAGE));
+	}
+
 
     @Override
     public InviteesModel createInvitees(InviteesRequest inviteesRequest){
@@ -77,4 +87,5 @@ public class InviteesServiceImpl implements InviteesService {
         return inviteesModel;
 
     }
+
 }

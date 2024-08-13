@@ -10,4 +10,6 @@ public class MessageCodes {
 
 	public static final String NO_DATA_FOUND_MESSAGE = "No data found";
 
+	public static final String INVITIEES_SAVED = "Invitees status updated";
+
 }
