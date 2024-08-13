@@ -10,5 +10,6 @@ public class VisitsRequest {
     private String barCode;
 
     private boolean isAccepted;
+
 }
 

@@ -9,14 +9,16 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Table(name = "visites")
 public class VisitesEntity {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
 
-    @ManyToOne
-    @JoinColumn(name = "invitees_id", nullable = false)
-    private InviteesEntity invitees;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
 
-    @Column(name = "barcode", nullable = false)
-    private String barcode;
+	@ManyToOne
+	@JoinColumn(name = "invitees_id", nullable = false)
+	private InviteesEntity invitees;
+
+	@Column(name = "barcode", nullable = false)
+	private String barcode;
+
 }

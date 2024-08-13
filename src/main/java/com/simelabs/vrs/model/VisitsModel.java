@@ -11,4 +11,5 @@ public class VisitsModel {
 
     private InviteesModel invitees;
 
+
 }

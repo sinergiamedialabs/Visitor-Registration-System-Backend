@@ -9,14 +9,15 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Table(name = "venue")
 public class VenueEntity {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
 
-    @Column(name = "name", nullable = false)
-    private String name;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
 
-    @Column(name = "address", nullable = false)
-    private String address;
+	@Column(name = "name", nullable = false)
+	private String name;
+
+	@Column(name = "address", nullable = false)
+	private String address;
 
 }
