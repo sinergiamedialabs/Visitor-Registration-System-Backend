@@ -27,6 +27,6 @@ public class InviteesEntity {
 	private EventEntity event;
 
 	@Column(name = "status", nullable = false)
-	private String status;
+	private Boolean status;
 
 }
