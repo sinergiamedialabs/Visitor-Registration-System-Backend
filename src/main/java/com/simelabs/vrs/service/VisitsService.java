@@ -5,5 +5,6 @@ import com.simelabs.vrs.request.VisitsRequest;
 
 public interface VisitsService {
 
-    VisitsModel saveVisits(VisitsRequest request);
+	VisitsModel saveVisits(VisitsRequest request);
+
 }

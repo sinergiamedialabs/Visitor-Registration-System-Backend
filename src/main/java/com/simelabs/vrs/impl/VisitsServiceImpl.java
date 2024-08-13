@@ -12,47 +12,47 @@ import org.springframework.stereotype.Service;
 @Service
 public class VisitsServiceImpl implements VisitsService {
 
-    @Autowired
-    InviteesRepository inviteesRepository;
+	@Autowired
+	InviteesRepository inviteesRepository;
 
-    @Autowired
-    VisitesRepository visitesRepository;
+	@Autowired
+	VisitesRepository visitesRepository;
 
-    @Override
-    public VisitsModel saveVisits(VisitsRequest request) {
-        InviteesEntity inviteesEntity = inviteesRepository.findById(request.getInvitees_id())
-                .orElseThrow(() -> new IllegalArgumentException("Invitees not found"));
+	@Override
+	public VisitsModel saveVisits(VisitsRequest request) {
+		InviteesEntity inviteesEntity = inviteesRepository.findById(request.getInvitees_id())
+				.orElseThrow(() -> new IllegalArgumentException("Invitees not found"));
 
-        if (request.isAccepted() == true) {
-            VisitesEntity visitesEntity = new VisitesEntity();
-            visitesEntity.setInvitees(inviteesEntity);
-            visitesEntity.setBarcode(request.getBarCode());
+		if (request.isAccepted() == true) {
+			VisitesEntity visitesEntity = new VisitesEntity();
+			visitesEntity.setInvitees(inviteesEntity);
+			visitesEntity.setBarcode(request.getBarCode());
 
-            VisitesEntity savedVisit = visitesRepository.save(visitesEntity);
+			VisitesEntity savedVisit = visitesRepository.save(visitesEntity);
 
-            inviteesEntity.setStatus(true);
-            inviteesRepository.save(inviteesEntity);
+			inviteesEntity.setStatus(true);
+			inviteesRepository.save(inviteesEntity);
 
-            return mapToVisitsResponse(savedVisit);
-        } else {
+			return mapToVisitsResponse(savedVisit);
+		}
+		else {
 
-            inviteesEntity.setStatus(true);
-            inviteesRepository.save(inviteesEntity);
+			inviteesEntity.setStatus(true);
+			inviteesRepository.save(inviteesEntity);
 
-            VisitsModel response = new VisitsModel();
-            response.setBarcode("Invitee status updated but visit not saved");
-            return response;
-        }
-    }
+			VisitsModel response = new VisitsModel();
+			response.setBarcode("Invitee status updated but visit not saved");
+			return response;
+		}
+	}
 
-    private VisitsModel mapToVisitsResponse(VisitesEntity visitesEntity) {
-        VisitsModel visitsModel = new VisitsModel();
+	private VisitsModel mapToVisitsResponse(VisitesEntity visitesEntity) {
+		VisitsModel visitsModel = new VisitsModel();
 
-        visitsModel.setId(visitesEntity.getId());
-        visitsModel.setBarcode(visitesEntity.getBarcode());
+		visitsModel.setId(visitesEntity.getId());
+		visitsModel.setBarcode(visitesEntity.getBarcode());
 
-        return visitsModel;
-    }
+		return visitsModel;
+	}
+
 }
-
-
