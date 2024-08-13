@@ -5,11 +5,10 @@ import lombok.Data;
 @Data
 public class VisitsModel {
 
-    private long id;
+	private long id;
 
-    private String barcode;
+	private String barcode;
 
-    private InviteesModel invitees;
-
+	private InviteesModel invitees;
 
 }
