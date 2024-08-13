@@ -17,7 +17,7 @@ public class EmailUtils {
 	@Autowired
 	private JavaMailSender javaMailSender;
 
-	@Value("${app.email.from}")
+	@Value("${VRS_MAIL_USERNAME}")
 	private String from;
 
 	public String sendEmail(EmailRequest emailRequest) {
