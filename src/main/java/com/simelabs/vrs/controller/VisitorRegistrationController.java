@@ -54,9 +54,6 @@ public class VisitorRegistrationController {
 	private EventService eventService;
 
 	@Autowired
-	private InviteesService inviteesService;
-
-	@Autowired
 	private ResponseUtils responseUtils;
 
 	@Autowired

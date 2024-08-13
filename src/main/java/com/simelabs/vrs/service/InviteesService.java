@@ -8,5 +8,6 @@ public interface InviteesService {
 
 	InviteesEntity getInviteeById(Long id);
 
-  InviteesModel createInvitees(InviteesRequest inviteesRequest);
+	InviteesModel createInvitees(InviteesRequest inviteesRequest);
+
 }
