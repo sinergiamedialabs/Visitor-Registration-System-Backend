@@ -1,13 +1,15 @@
 package com.simelabs.vrs.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
-import lombok.AllArgsConstructor;
+import jakarta.persistence.*;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Entity
 @Data
-@AllArgsConstructor
+@NoArgsConstructor
 @Table(name = "")
 public class EventEntity {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 }

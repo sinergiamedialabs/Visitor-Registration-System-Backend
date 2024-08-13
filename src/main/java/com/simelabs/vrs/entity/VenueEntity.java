@@ -1,7 +1,6 @@
 package com.simelabs.vrs.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -10,4 +9,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Table(name = "")
 public class VenueEntity {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 }
