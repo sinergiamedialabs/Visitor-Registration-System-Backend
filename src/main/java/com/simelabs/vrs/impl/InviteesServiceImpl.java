@@ -5,6 +5,8 @@ import com.simelabs.vrs.entity.EventEntity;
 import com.simelabs.vrs.entity.InviteesEntity;
 import com.simelabs.vrs.entity.UserEntity;
 import com.simelabs.vrs.entity.VenueEntity;
+import com.simelabs.vrs.exception.CustomException;
+import com.simelabs.vrs.exception.ResourceNotFoundException;
 import com.simelabs.vrs.model.EventModel;
 import com.simelabs.vrs.model.InviteesModel;
 import com.simelabs.vrs.model.UserModel;
@@ -19,8 +21,6 @@ import com.simelabs.vrs.service.InviteesService;
 import com.simelabs.vrs.utils.EmailUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.util.Optional;
 
 @Service
 public class InviteesServiceImpl implements InviteesService {
@@ -47,48 +47,62 @@ public class InviteesServiceImpl implements InviteesService {
 	}
 
 	@Override
-	public InviteesModel createInvitees(InviteesRequest inviteesRequest) {
+	public InviteesModel createInvitees(InviteesRequest inviteesRequest) throws CustomException {
+		boolean isUserAlreadyAssigned = inviteesRepository.existsByUserIdAndEventId(inviteesRequest.getUserId(),
+				inviteesRequest.getEventId());
 
-		InviteesModel inviteesModel = new InviteesModel();
+		if (isUserAlreadyAssigned) {
+			throw new CustomException("Email already sent to the user for this event.");
+		}
+
 		InviteesEntity inviteesEntity = new InviteesEntity();
 
-		inviteesEntity.setId(inviteesEntity.getId());
+		UserEntity userEntity = userRepository.findById(inviteesRequest.getUserId()).orElseThrow(
+				() -> new ResourceNotFoundException("User not found for id: " + inviteesRequest.getUserId()));
 
-		Optional<UserEntity> userEntity = userRepository.findById(inviteesRequest.getUserId());
-		inviteesEntity.setUser(userEntity.get());
+		VenueEntity venueEntity = venueRepository.findById(inviteesRequest.getVenueId()).orElseThrow(
+				() -> new ResourceNotFoundException("Venue not found for id: " + inviteesRequest.getVenueId()));
 
-		Optional<VenueEntity> venueEntity = venueRepository.findById(inviteesRequest.getVenueId());
-		inviteesEntity.setVenue(venueEntity.get());
+		EventEntity eventEntity = eventRepository.findById(inviteesRequest.getEventId()).orElseThrow(
+				() -> new ResourceNotFoundException("Event not found for id: " + inviteesRequest.getEventId()));
 
-		Optional<EventEntity> eventEntity = eventRepository.findById(inviteesRequest.getEventId());
-		inviteesEntity.setEvent(eventEntity.get());
-
+		inviteesEntity.setUser(userEntity);
+		inviteesEntity.setVenue(venueEntity);
+		inviteesEntity.setEvent(eventEntity);
 		inviteesEntity.setStatus(inviteesRequest.isStatus());
 
-		InviteesEntity inviteEntity = inviteesRepository.save(inviteesEntity);
-		emailTrigger(inviteesRequest, inviteEntity, userEntity.get());
+		InviteesEntity savedEntity = inviteesRepository.save(inviteesEntity);
+		emailTrigger(inviteesRequest, savedEntity, userEntity);
+
+		return mapEntityToModel(savedEntity, userEntity, venueEntity, eventEntity);
+	}
+
+	private InviteesModel mapEntityToModel(InviteesEntity inviteEntity, UserEntity userEntity, VenueEntity venueEntity,
+			EventEntity eventEntity) {
+		InviteesModel inviteesModel = new InviteesModel();
 
 		inviteesModel.setId(inviteEntity.getId());
 		inviteesModel.setStatus(inviteEntity.getStatus());
+
 		UserModel userModel = new UserModel();
-		userModel.setId(userEntity.get().getId());
-		userModel.setFullName(userEntity.get().getFullName());
-		userModel.setEmail(userEntity.get().getEmail());
-		userModel.setPhoneNumber(userEntity.get().getPhoneNumber());
+		userModel.setId(userEntity.getId());
+		userModel.setFullName(userEntity.getFullName());
+		userModel.setEmail(userEntity.getEmail());
+		userModel.setPhoneNumber(userEntity.getPhoneNumber());
 		inviteesModel.setUser(userModel);
+
 		VenueModel venueModel = new VenueModel();
-		venueModel.setId(venueEntity.get().getId());
-		venueModel.setName(venueEntity.get().getName());
-		venueModel.setAddress(venueEntity.get().getAddress());
+		venueModel.setId(venueEntity.getId());
+		venueModel.setName(venueEntity.getName());
+		venueModel.setAddress(venueEntity.getAddress());
 		inviteesModel.setVenue(venueModel);
 
 		EventModel eventModel = new EventModel();
-		eventModel.setId(eventEntity.get().getId());
-		eventModel.setName(eventEntity.get().getName());
+		eventModel.setId(eventEntity.getId());
+		eventModel.setName(eventEntity.getName());
 		inviteesModel.setEvent(eventModel);
 
 		return inviteesModel;
-
 	}
 
 	private void emailTrigger(InviteesRequest inviteesRequest, InviteesEntity inviteEntity, UserEntity user) {
