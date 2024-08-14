@@ -37,4 +37,4 @@ jobs:
         aws-region: ${{ secrets.AWS_REGION }}  
 
     - name: Push docker image to ECR
-      run: docker push ${{ secrets.ECR_URL}}/${{secrets.ECR_REPO}}:latest
+      run: docker push ${{ secrets.ECR_URL}}/${{secrets.ECR_REPOSITORY}}:latest
