@@ -2,7 +2,7 @@ name: GC Build - QA
 
 on:
   push:
-    branches: [ "docker-build" ]
+    branches: [ "docker-build", "dev" ]
   #pull_request:
     #branches: [ "master" ]
 
