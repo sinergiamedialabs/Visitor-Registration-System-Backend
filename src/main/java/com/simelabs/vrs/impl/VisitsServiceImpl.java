@@ -39,10 +39,7 @@ public class VisitsServiceImpl implements VisitsService {
 
 			inviteesEntity.setStatus(true);
 			inviteesRepository.save(inviteesEntity);
-
-			VisitsModel response = new VisitsModel();
-			response.setBarcode("Invitee status updated but visit not saved");
-			return response;
+			return null;
 		}
 	}
 

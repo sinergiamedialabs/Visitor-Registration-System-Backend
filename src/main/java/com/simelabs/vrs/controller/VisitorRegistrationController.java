@@ -64,7 +64,7 @@ public class VisitorRegistrationController {
 		}
 		else {
 			baseResponse = responseUtils.setBaseResponse(null, MessageCodes.API_ERROR_MESSAGE_CODE,
-					MessageCodes.NO_DATA_FOUND_MESSAGE, true);
+					"Invitee status updated but visit not saved", true);
 
 		}
 		return new ResponseEntity<>(baseResponse, HttpStatus.OK);
