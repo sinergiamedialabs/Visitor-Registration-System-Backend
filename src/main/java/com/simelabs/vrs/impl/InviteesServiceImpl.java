@@ -51,12 +51,6 @@ public class InviteesServiceImpl implements InviteesService {
 
 	@Override
 	public InviteesModel createInvitees(InviteesRequest inviteesRequest) throws CustomException {
-		boolean isUserAlreadyAssigned = inviteesRepository.existsByUserIdAndEventId(inviteesRequest.getUserId(),
-				inviteesRequest.getEventId());
-
-		if (isUserAlreadyAssigned) {
-			throw new CustomException(MessageCodes.EMAIL_ERROR_MESSAGE);
-		}
 
 		InviteesEntity inviteesEntity = new InviteesEntity();
 
