@@ -1,8 +1,6 @@
 package com.simelabs.vrs.entity;
 
 import jakarta.persistence.*;
-import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 

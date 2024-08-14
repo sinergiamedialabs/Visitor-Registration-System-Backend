@@ -20,7 +20,7 @@ public class EmailUtils {
 	@Value("${VRS_MAIL_USERNAME}")
 	private String from;
 
-	public String sendEmail(EmailRequest emailRequest) {
+	public void sendEmail(EmailRequest emailRequest) {
 
 		try {
 			MimeMessage mimeMessage = javaMailSender.createMimeMessage();
@@ -32,7 +32,6 @@ public class EmailUtils {
 			mimeMessageHelper.setSubject("Test mail");
 
 			javaMailSender.send(mimeMessage);
-			return "Email sent successfully!";
 		}
 		catch (AddressException addressException) {
 			throw new MailSendException("Invalid email address: " + emailRequest.getTo(), addressException);

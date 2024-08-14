@@ -23,7 +23,7 @@ public class VisitsServiceImpl implements VisitsService {
 		InviteesEntity inviteesEntity = inviteesRepository.findById(request.getInvitees_id())
 				.orElseThrow(() -> new IllegalArgumentException("Invitees not found"));
 
-		if (request.isAccepted() == true) {
+		if (request.isAccepted()) {
 			VisitesEntity visitesEntity = new VisitesEntity();
 			visitesEntity.setInvitees(inviteesEntity);
 			visitesEntity.setBarcode(request.getBarCode());

@@ -1,6 +1,8 @@
 package com.simelabs.vrs.exception;
 
 import com.simelabs.vrs.constants.ErrorConstant;
+import com.simelabs.vrs.constants.MessageCodes;
+import com.simelabs.vrs.response.BaseResponse;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
@@ -26,6 +28,14 @@ public class CustomRestExceptionHandler {
 		log.info(ErrorConstant.REASON_LOG, ex.getMessage());
 		final ApiError apiError = new ApiError(HttpStatus.INTERNAL_SERVER_ERROR, reason, message, LocalDateTime.now());
 		return new ResponseEntity<>(apiError, new HttpHeaders(), HttpStatus.BAD_REQUEST);
+	}
+
+	@ExceptionHandler(ResourceNotFoundException.class)
+	public ResponseEntity<BaseResponse> resourceNotFoundException(ResourceNotFoundException ex) {
+		BaseResponse message = new BaseResponse();
+		message.setMessage(ex.getMessage());
+		message.setCode(MessageCodes.API_ERROR_MESSAGE_CODE);
+		return new ResponseEntity<>(message, HttpStatus.NOT_FOUND);
 	}
 
 }
