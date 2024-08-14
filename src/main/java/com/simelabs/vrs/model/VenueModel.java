@@ -1,6 +1,5 @@
 package com.simelabs.vrs.model;
 
-import jakarta.persistence.Column;
 import lombok.Data;
 
 @Data
