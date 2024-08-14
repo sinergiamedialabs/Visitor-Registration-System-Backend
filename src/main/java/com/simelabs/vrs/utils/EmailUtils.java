@@ -23,13 +23,14 @@ public class EmailUtils {
 	public void sendEmail(EmailRequest emailRequest) {
 
 		try {
+			String body = "You are invited for an event.Please click on the links for the details" + "\n<a href='"
+					+ emailRequest.getUrl() + "'>Please click here</a>";
 			MimeMessage mimeMessage = javaMailSender.createMimeMessage();
 			MimeMessageHelper mimeMessageHelper = new MimeMessageHelper(mimeMessage, false);
-
 			mimeMessageHelper.setFrom(from);
 			mimeMessageHelper.setTo(emailRequest.getTo());
-			mimeMessageHelper.setText(emailRequest.getUrl());
-			mimeMessageHelper.setSubject("Test mail");
+			mimeMessageHelper.setText(body, true);
+			mimeMessageHelper.setSubject("Invitation For An Event");
 
 			javaMailSender.send(mimeMessage);
 		}

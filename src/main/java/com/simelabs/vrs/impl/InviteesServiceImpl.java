@@ -82,7 +82,7 @@ public class InviteesServiceImpl implements InviteesService {
 		InviteesModel inviteesModel = new InviteesModel();
 
 		inviteesModel.setId(inviteEntity.getId());
-		inviteesModel.setStatus(inviteEntity.getStatus());
+		inviteesModel.setStatus(false);
 
 		UserModel userModel = new UserModel();
 		userModel.setId(userEntity.getId());
