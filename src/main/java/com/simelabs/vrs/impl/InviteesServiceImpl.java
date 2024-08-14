@@ -52,7 +52,7 @@ public class InviteesServiceImpl implements InviteesService {
 				inviteesRequest.getEventId());
 
 		if (isUserAlreadyAssigned) {
-			throw new CustomException("Email already sent to the user for this event.");
+			throw new CustomException(MessageCodes.EMAIL_ERROR_MESSAGE);
 		}
 
 		InviteesEntity inviteesEntity = new InviteesEntity();
