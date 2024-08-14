@@ -22,6 +22,9 @@ import com.simelabs.vrs.utils.EmailUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.sql.Date;
+import java.text.SimpleDateFormat;
+
 @Service
 public class InviteesServiceImpl implements InviteesService {
 
@@ -100,6 +103,7 @@ public class InviteesServiceImpl implements InviteesService {
 		EventModel eventModel = new EventModel();
 		eventModel.setId(eventEntity.getId());
 		eventModel.setName(eventEntity.getName());
+		eventModel.setEventDate(eventEntity.getEventDate());
 		inviteesModel.setEvent(eventModel);
 
 		return inviteesModel;
