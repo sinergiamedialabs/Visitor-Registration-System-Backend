@@ -10,6 +10,6 @@ public class MessageCodes {
 
 	public static final String NO_DATA_FOUND_MESSAGE = "No data found";
 
-	public static final String INVITIEES_SAVED = "Invitees status updated";
+	public static final String EMAIL_ERROR_MESSAGE = "Email already sent to the user for this event.";
 
 }
