@@ -10,4 +10,6 @@ public class ApiEndPoints {
 
 	public static final String POST_INVITEES = "/invitees";
 
+	public static final String ADD_USERS = "/addUsers";
+
 }
