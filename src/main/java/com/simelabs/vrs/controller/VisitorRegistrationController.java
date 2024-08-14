@@ -1,7 +1,9 @@
 package com.simelabs.vrs.controller;
 
 import com.simelabs.vrs.impl.VisitsServiceImpl;
+import com.simelabs.vrs.model.UserModel;
 import com.simelabs.vrs.model.VisitsModel;
+import com.simelabs.vrs.request.UserRequest;
 import com.simelabs.vrs.request.VisitsRequest;
 import com.simelabs.vrs.constants.ApiEndPoints;
 import com.simelabs.vrs.constants.MessageCodes;
@@ -137,6 +139,23 @@ public class VisitorRegistrationController {
 					false);
 			return new ResponseEntity<>(baseResponse, HttpStatus.BAD_REQUEST);
 		}
+	}
+
+	@PostMapping(value = ApiEndPoints.ADD_USERS, produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<BaseResponse<UserModel>> addUser(@RequestBody UserRequest userRequest) {
+
+		UserModel userModel = userService.addUser(userRequest);
+		BaseResponse<UserModel> baseResponse;
+
+		if (userModel != null) {
+			baseResponse = responseUtils.setBaseResponse(userModel, MessageCodes.API_SUCCESS_MESSAGE_CODE,
+					MessageCodes.API_SUCCESS_MESSAGE, true);
+		}
+		else {
+			baseResponse = responseUtils.setBaseResponse(null, MessageCodes.API_ERROR_MESSAGE_CODE,
+					MessageCodes.NO_DATA_FOUND_MESSAGE, false);
+		}
+		return new ResponseEntity<>(baseResponse, HttpStatus.OK);
 	}
 
 }
