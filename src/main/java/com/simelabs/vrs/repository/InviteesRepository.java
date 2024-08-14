@@ -7,4 +7,6 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface InviteesRepository extends JpaRepository<InviteesEntity, Long> {
 
+	boolean existsByUserIdAndEventId(Long userId, Long eventId);
+
 }

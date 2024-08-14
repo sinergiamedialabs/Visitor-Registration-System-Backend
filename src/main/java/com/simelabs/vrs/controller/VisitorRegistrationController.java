@@ -22,12 +22,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.HashMap;
 import java.util.List;
@@ -66,7 +61,7 @@ public class VisitorRegistrationController {
 		}
 		else {
 			baseResponse = responseUtils.setBaseResponse(null, MessageCodes.API_ERROR_MESSAGE_CODE,
-					MessageCodes.NO_DATA_FOUND_MESSAGE, true);
+					"Invitee status updated but visit not saved", true);
 
 		}
 		return new ResponseEntity<>(baseResponse, HttpStatus.OK);
@@ -117,10 +112,31 @@ public class VisitorRegistrationController {
 	}
 
 	@PostMapping(value = ApiEndPoints.POST_INVITEES, produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<InviteesModel> createInvitees(@RequestBody InviteesRequest inviteesRequest) {
-		InviteesModel inviteesModel = inviteesService.createInvitees(inviteesRequest);
-		return new ResponseEntity<>(inviteesModel, HttpStatus.CREATED);
+	public ResponseEntity<BaseResponse<InviteesModel>> createInvitees(@RequestBody InviteesRequest inviteesRequest) {
 
+		InviteesModel inviteesModel;
+		BaseResponse<InviteesModel> baseResponse;
+
+		try {
+			inviteesModel = inviteesService.createInvitees(inviteesRequest);
+
+			if (inviteesModel != null) {
+				baseResponse = responseUtils.setBaseResponse(inviteesModel, MessageCodes.API_SUCCESS_MESSAGE_CODE,
+						MessageCodes.API_SUCCESS_MESSAGE, true);
+				return new ResponseEntity<>(baseResponse, HttpStatus.CREATED);
+			}
+			else {
+				baseResponse = responseUtils.setBaseResponse(null, MessageCodes.API_ERROR_MESSAGE_CODE,
+						MessageCodes.NO_DATA_FOUND_MESSAGE, false);
+				return new ResponseEntity<>(baseResponse, HttpStatus.BAD_REQUEST);
+			}
+
+		}
+		catch (Exception e) {
+			baseResponse = responseUtils.setBaseResponse(null, MessageCodes.API_ERROR_MESSAGE_CODE, e.getMessage(),
+					false);
+			return new ResponseEntity<>(baseResponse, HttpStatus.INTERNAL_SERVER_ERROR);
+		}
 	}
 
 }
