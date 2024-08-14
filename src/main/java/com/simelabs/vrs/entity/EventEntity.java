@@ -4,6 +4,8 @@ import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.sql.Date;
+
 @Entity
 @Data
 @NoArgsConstructor
@@ -16,5 +18,8 @@ public class EventEntity {
 
 	@Column(name = "event_name")
 	private String name;
+
+	@Column(name = "event_date")
+	private Date eventDate;
 
 }

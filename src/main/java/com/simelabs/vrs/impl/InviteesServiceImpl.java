@@ -100,6 +100,7 @@ public class InviteesServiceImpl implements InviteesService {
 		EventModel eventModel = new EventModel();
 		eventModel.setId(eventEntity.getId());
 		eventModel.setName(eventEntity.getName());
+		eventModel.setEventDate(eventEntity.getEventDate());
 		inviteesModel.setEvent(eventModel);
 
 		return inviteesModel;
