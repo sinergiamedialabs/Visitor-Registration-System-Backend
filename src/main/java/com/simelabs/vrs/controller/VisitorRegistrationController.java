@@ -137,7 +137,7 @@ public class VisitorRegistrationController {
 		catch (Exception e) {
 			baseResponse = responseUtils.setBaseResponse(null, MessageCodes.API_ERROR_MESSAGE_CODE, e.getMessage(),
 					false);
-			return new ResponseEntity<>(baseResponse, HttpStatus.INTERNAL_SERVER_ERROR);
+			return new ResponseEntity<>(baseResponse, HttpStatus.BAD_REQUEST);
 		}
 	}
 
