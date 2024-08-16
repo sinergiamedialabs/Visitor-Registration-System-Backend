@@ -172,8 +172,8 @@ class InviteesServiceImplTest {
 		InviteesRequest request = EntityMocks.getInviteesRequest();
 		UserEntity userEntity = new UserEntity();
 		when(userRepository.findById(1L)).thenReturn(Optional.of(userEntity));
-		when(venueRepository.findById(1L)).thenReturn(Optional.empty()); // Simulate venue
-																			// not found
+		when(venueRepository.findById(1L)).thenReturn(Optional.empty());
+
 		ResourceNotFoundException thrown = assertThrows(ResourceNotFoundException.class, () -> {
 			inviteesServiceImpl.createInvitees(request);
 		});
