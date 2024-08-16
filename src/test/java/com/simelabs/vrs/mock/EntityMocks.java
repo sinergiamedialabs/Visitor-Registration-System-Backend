@@ -1,8 +1,10 @@
 package com.simelabs.vrs.mock;
 
 import com.simelabs.vrs.entity.EventEntity;
+import com.simelabs.vrs.entity.InviteesEntity;
 import com.simelabs.vrs.entity.UserEntity;
 import com.simelabs.vrs.entity.VenueEntity;
+import com.simelabs.vrs.request.InviteesRequest;
 import com.simelabs.vrs.model.UserModel;
 import com.simelabs.vrs.request.UserRequest;
 import com.simelabs.vrs.response.BaseResponse;
@@ -45,13 +47,21 @@ public class EntityMocks {
 		return userRequest;
 	}
 
-	public static UserModel getUserModel() {
-		UserModel userModel = new UserModel();
-		userModel.setFullName("Rahul EK");
-		userModel.setEmail("rahukek@gmail.com");
-		userModel.setPhoneNumber("1234567890");
-		return userModel;
+	public static VenueEntity getVenueEntity() {
+		VenueEntity venue = new VenueEntity();
+		venue.setId(1L);
+		venue.setName("Chakolas Pavilion");
+		venue.setAddress("Chackolas Pavilion,Kalamassery");
+		return venue;
 	}
+
+    public static UserModel getUserModel() {
+        UserModel userModel = new UserModel();
+        userModel.setFullName("Rahul EK");
+        userModel.setEmail("rahukek@gmail.com");
+        userModel.setPhoneNumber("1234567890");
+        return userModel;
+    }
 
 	public static List<VenueEntity> getVenueEntityList() {
 		VenueEntity venue1 = new VenueEntity();
@@ -63,6 +73,13 @@ public class EntityMocks {
 		venue2.setName("Venue 2");
 
 		return Arrays.asList(venue1, venue2);
+	}
+
+	public static EventEntity getEventEntity() {
+		EventEntity event = new EventEntity();
+		event.setId(1L);
+		event.setName("10th Anniversary");
+		return event;
 	}
 
 	public static List<EventEntity> getEventEntityList() {
@@ -113,6 +130,26 @@ public class EntityMocks {
 		venue2.setId(2L);
 		venue2.setName("Venue 2");
 		return venue2;
+	}
+
+	public static InviteesRequest getInviteesRequest() {
+		InviteesRequest inviteesRequest = new InviteesRequest();
+		inviteesRequest.setUserId(1L);
+		inviteesRequest.setEventId(1L);
+		inviteesRequest.setVenueId(1L);
+		inviteesRequest.setUrl("www.google.com");
+		return inviteesRequest;
+	}
+
+	public static InviteesEntity getInviteesEntity() {
+		InviteesEntity invitees = new InviteesEntity();
+		invitees.setId(1L);
+		invitees.setStatus(false);
+		invitees.setUser(getUserEntity());
+		invitees.setVenue(getVenueEntityList().get(0));
+		invitees.setEvent(getEventEntityList().get(0));
+
+		return invitees;
 	}
 
 }
