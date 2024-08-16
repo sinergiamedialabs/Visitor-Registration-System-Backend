@@ -29,7 +29,7 @@ import com.simelabs.vrs.utils.EmailUtils;
 import java.util.Optional;
 
 @MockitoSettings(strictness = Strictness.LENIENT)
-public class InviteesServiceImplTest {
+class InviteesServiceImplTest {
 
 	@Mock
 	private UserRepository userRepository;
@@ -55,7 +55,7 @@ public class InviteesServiceImplTest {
 	}
 
 	@Test
-	public void testCreateInvitees_Success() throws CustomException {
+	void testCreateInvitees_Success() throws CustomException {
 
 		InviteesRequest inviteesRequest = EntityMocks.getInviteesRequest();
 		UserEntity userEntity = EntityMocks.getUserEntity();
@@ -84,7 +84,7 @@ public class InviteesServiceImplTest {
 	}
 
 	@Test
-	public void testCreateInvitees_UserNotFound() {
+	void testCreateInvitees_UserNotFound() {
 
 		InviteesRequest inviteesRequest = EntityMocks.getInviteesRequest();
 		when(userRepository.findById(inviteesRequest.getUserId())).thenReturn(Optional.empty());
@@ -100,7 +100,7 @@ public class InviteesServiceImplTest {
 	}
 
 	@Test
-	public void testCreateInvitees_VenueNotFound() {
+	void testCreateInvitees_VenueNotFound() {
 
 		InviteesRequest inviteesRequest = EntityMocks.getInviteesRequest();
 		UserEntity userEntity = EntityMocks.getUserEntity();
@@ -117,7 +117,7 @@ public class InviteesServiceImplTest {
 	}
 
 	@Test
-	public void testCreateInvitees_EventNotFound() {
+	void testCreateInvitees_EventNotFound() {
 
 		InviteesRequest inviteesRequest = EntityMocks.getInviteesRequest();
 		UserEntity userEntity = EntityMocks.getUserEntity();
