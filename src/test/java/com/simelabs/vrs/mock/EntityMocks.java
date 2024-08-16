@@ -5,6 +5,7 @@ import com.simelabs.vrs.entity.InviteesEntity;
 import com.simelabs.vrs.entity.UserEntity;
 import com.simelabs.vrs.entity.VenueEntity;
 import com.simelabs.vrs.request.InviteesRequest;
+import com.simelabs.vrs.model.UserModel;
 import com.simelabs.vrs.request.UserRequest;
 import com.simelabs.vrs.response.BaseResponse;
 
@@ -54,6 +55,14 @@ public class EntityMocks {
 		return venue;
 	}
 
+	public static UserModel getUserModel() {
+		UserModel userModel = new UserModel();
+		userModel.setFullName("Rahul EK");
+		userModel.setEmail("rahukek@gmail.com");
+		userModel.setPhoneNumber("1234567890");
+		return userModel;
+	}
+
 	public static List<VenueEntity> getVenueEntityList() {
 		VenueEntity venue1 = new VenueEntity();
 		venue1.setId(1L);
@@ -64,6 +73,13 @@ public class EntityMocks {
 		venue2.setName("Venue 2");
 
 		return Arrays.asList(venue1, venue2);
+	}
+
+	public static InviteesEntity getsInviteesEntity() {
+		InviteesEntity inviteesEntity = new InviteesEntity();
+		inviteesEntity.setId(1L);
+		inviteesEntity.setStatus(false);
+		return inviteesEntity;
 	}
 
 	public static EventEntity getEventEntity() {
