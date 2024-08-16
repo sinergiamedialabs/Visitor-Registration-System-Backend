@@ -123,24 +123,24 @@ public class EntityMocks {
 		return venue2;
 	}
 
-    public static InviteesRequest getInviteesRequest() {
-        InviteesRequest inviteesRequest = new InviteesRequest();
-        inviteesRequest.setUserId(1L);
-        inviteesRequest.setEventId(1L);
-        inviteesRequest.setVenueId(1L);
-        inviteesRequest.setUrl("www.google.com");
-        return inviteesRequest;
-    }
+	public static InviteesRequest getInviteesRequest() {
+		InviteesRequest inviteesRequest = new InviteesRequest();
+		inviteesRequest.setUserId(1L);
+		inviteesRequest.setEventId(1L);
+		inviteesRequest.setVenueId(1L);
+		inviteesRequest.setUrl("www.google.com");
+		return inviteesRequest;
+	}
 
-    public static InviteesEntity getInviteesEntity() {
-        InviteesEntity invitees = new InviteesEntity();
-        invitees.setId(1L);
-        invitees.setStatus(false);
-        invitees.setUser(getUserEntity());
-        invitees.setVenue(getVenueEntityList().get(0));
-        invitees.setEvent(getEventEntityList().get(0));
+	public static InviteesEntity getInviteesEntity() {
+		InviteesEntity invitees = new InviteesEntity();
+		invitees.setId(1L);
+		invitees.setStatus(false);
+		invitees.setUser(getUserEntity());
+		invitees.setVenue(getVenueEntityList().get(0));
+		invitees.setEvent(getEventEntityList().get(0));
 
-        return invitees;
-    }
+		return invitees;
+	}
 
 }
