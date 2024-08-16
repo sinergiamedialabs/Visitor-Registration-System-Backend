@@ -8,6 +8,8 @@ import com.simelabs.vrs.request.InviteesRequest;
 import com.simelabs.vrs.request.UserRequest;
 import com.simelabs.vrs.response.BaseResponse;
 
+import com.simelabs.vrs.entity.InviteesEntity;
+import com.simelabs.vrs.entity.VisitesEntity;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -26,6 +28,7 @@ public class EntityMocks {
 
 	public static List<UserEntity> getUserEntityList() {
 		List<UserEntity> users = new ArrayList<>();
+		users.add(getUserEntity());
 		UserEntity user = new UserEntity();
 		user.setId(2L);
 		user.setFullName("Midhun K");
@@ -92,24 +95,52 @@ public class EntityMocks {
 		return baseResponse;
 	}
 
-	public static InviteesRequest getInviteesRequest() {
-		InviteesRequest inviteesRequest = new InviteesRequest();
-		inviteesRequest.setUserId(1L);
-		inviteesRequest.setEventId(1L);
-		inviteesRequest.setVenueId(1L);
-		inviteesRequest.setUrl("www.google.com");
-		return inviteesRequest;
+	public static InviteesEntity inviteesEntity() {
+		InviteesEntity inviteesEntity = new InviteesEntity();
+		inviteesEntity.setId(1L);
+		inviteesEntity.setStatus(false);
+		return inviteesEntity;
 	}
 
-	public static InviteesEntity getInviteesEntity() {
-		InviteesEntity invitees = new InviteesEntity();
-		invitees.setId(1L);
-		invitees.setStatus(false);
-		invitees.setUser(getUserEntity());
-		invitees.setVenue(getVenueEntityList().get(0));
-		invitees.setEvent(getEventEntityList().get(0));
-
-		return invitees;
+	public static VisitesEntity visitesEntity() {
+		VisitesEntity visitesEntity = new VisitesEntity();
+		visitesEntity.setId(1L);
+		visitesEntity.setBarcode("123456");
+		return visitesEntity;
 	}
+
+	public static VenueEntity venueEntity1() {
+		VenueEntity venue1 = new VenueEntity();
+		venue1.setId(1L);
+		venue1.setName("Venue 1");
+		return venue1;
+	}
+
+	public static VenueEntity venueEntity2() {
+		VenueEntity venue2 = new VenueEntity();
+		venue2.setId(2L);
+		venue2.setName("Venue 2");
+		return venue2;
+	}
+
+    public static InviteesRequest getInviteesRequest() {
+        InviteesRequest inviteesRequest = new InviteesRequest();
+        inviteesRequest.setUserId(1L);
+        inviteesRequest.setEventId(1L);
+        inviteesRequest.setVenueId(1L);
+        inviteesRequest.setUrl("www.google.com");
+        return inviteesRequest;
+    }
+
+    public static InviteesEntity getInviteesEntity() {
+        InviteesEntity invitees = new InviteesEntity();
+        invitees.setId(1L);
+        invitees.setStatus(false);
+        invitees.setUser(getUserEntity());
+        invitees.setVenue(getVenueEntityList().get(0));
+        invitees.setEvent(getEventEntityList().get(0));
+
+        return invitees;
+    }
 
 }
