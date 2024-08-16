@@ -9,7 +9,6 @@ import com.simelabs.vrs.model.UserModel;
 import com.simelabs.vrs.request.UserRequest;
 import com.simelabs.vrs.response.BaseResponse;
 
-import com.simelabs.vrs.entity.InviteesEntity;
 import com.simelabs.vrs.entity.VisitesEntity;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -73,13 +72,6 @@ public class EntityMocks {
 		venue2.setName("Venue 2");
 
 		return Arrays.asList(venue1, venue2);
-	}
-
-	public static InviteesEntity getsInviteesEntity() {
-		InviteesEntity inviteesEntity = new InviteesEntity();
-		inviteesEntity.setId(1L);
-		inviteesEntity.setStatus(false);
-		return inviteesEntity;
 	}
 
 	public static EventEntity getEventEntity() {

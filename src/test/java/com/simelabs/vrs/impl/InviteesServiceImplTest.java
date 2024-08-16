@@ -103,7 +103,8 @@ class InviteesServiceImplTest {
 	void testCreateInvitees_VenueNotFound() {
 
 		InviteesRequest inviteesRequest = EntityMocks.getInviteesRequest();
-		UserEntity userEntity = EntityMocks.getUserEntity();
+		UserEntity userEntity = new UserEntity();
+		VenueEntity venueEntity = new VenueEntity();
 
 		when(userRepository.findById(inviteesRequest.getUserId())).thenReturn(java.util.Optional.of(userEntity));
 		when(venueRepository.findById(inviteesRequest.getVenueId()))
@@ -120,8 +121,8 @@ class InviteesServiceImplTest {
 	void testCreateInvitees_EventNotFound() {
 
 		InviteesRequest inviteesRequest = EntityMocks.getInviteesRequest();
-		UserEntity userEntity = EntityMocks.getUserEntity();
-		VenueEntity venueEntity = EntityMocks.getVenueEntity();
+		UserEntity userEntity = new UserEntity();
+		VenueEntity venueEntity = new VenueEntity();
 
 		when(userRepository.findById(inviteesRequest.getUserId())).thenReturn(java.util.Optional.of(userEntity));
 		when(venueRepository.findById(inviteesRequest.getVenueId())).thenReturn(java.util.Optional.of(venueEntity));
@@ -134,6 +135,54 @@ class InviteesServiceImplTest {
 		verify(venueRepository).findById(inviteesRequest.getVenueId());
 		verify(eventRepository).findById(inviteesRequest.getEventId());
 		verifyNoMoreInteractions(inviteesRepository, emailUtils);
+	}
+
+	@Test
+	void testGetInviteeById_Found() {
+		Long inviteeId = 1L;
+		InviteesEntity expectedInvitee = new InviteesEntity();
+		when(inviteesRepository.findById(inviteeId)).thenReturn(Optional.of(expectedInvitee));
+		InviteesEntity actualInvitee = inviteesServiceImpl.getInviteeById(inviteeId);
+		assertEquals(expectedInvitee, actualInvitee);
+	}
+
+	@Test
+	void testCreateInvitees_eventNotFound() {
+		InviteesRequest request = EntityMocks.getInviteesRequest();
+		UserEntity userEntity = new UserEntity();
+		VenueEntity venueEntity = new VenueEntity();
+
+		when(userRepository.findById(1L)).thenReturn(Optional.of(userEntity));
+		when(venueRepository.findById(1L)).thenReturn(Optional.of(venueEntity));
+		when(eventRepository.findById(1L)).thenReturn(Optional.empty());
+		ResourceNotFoundException thrown = assertThrows(ResourceNotFoundException.class, () -> {
+			inviteesServiceImpl.createInvitees(request);
+		});
+
+		assertEquals("Event not found for id: 1", thrown.getMessage());
+		verify(userRepository).findById(1L);
+		verify(venueRepository).findById(1L);
+		verify(eventRepository).findById(1L);
+		verify(inviteesRepository, never()).save(any(InviteesEntity.class));
+	}
+
+	@Test
+	void testCreateInvitees_venueNotFound() {
+
+		InviteesRequest request = EntityMocks.getInviteesRequest();
+		UserEntity userEntity = new UserEntity();
+		when(userRepository.findById(1L)).thenReturn(Optional.of(userEntity));
+		when(venueRepository.findById(1L)).thenReturn(Optional.empty());
+
+		ResourceNotFoundException thrown = assertThrows(ResourceNotFoundException.class, () -> {
+			inviteesServiceImpl.createInvitees(request);
+		});
+
+		assertEquals("Venue not found for id: 1", thrown.getMessage());
+		verify(userRepository).findById(1L);
+		verify(venueRepository).findById(1L);
+		verify(eventRepository, never()).findById(anyLong());
+		verify(inviteesRepository, never()).save(any(InviteesEntity.class));
 	}
 
 }

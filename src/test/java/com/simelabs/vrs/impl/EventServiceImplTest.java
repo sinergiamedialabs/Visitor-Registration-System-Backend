@@ -3,7 +3,6 @@ package com.simelabs.vrs.impl;
 import com.simelabs.vrs.entity.EventEntity;
 import com.simelabs.vrs.mock.EntityMocks;
 import com.simelabs.vrs.entity.VenueEntity;
-import com.simelabs.vrs.mock.EntityMocks;
 import com.simelabs.vrs.repository.EventRepository;
 import org.junit.jupiter.api.Test;
 import com.simelabs.vrs.repository.VenueRepository;

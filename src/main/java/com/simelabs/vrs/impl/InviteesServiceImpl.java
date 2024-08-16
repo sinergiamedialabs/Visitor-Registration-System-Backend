@@ -22,9 +22,6 @@ import com.simelabs.vrs.utils.EmailUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.sql.Date;
-import java.text.SimpleDateFormat;
-
 @Service
 public class InviteesServiceImpl implements InviteesService {
 
