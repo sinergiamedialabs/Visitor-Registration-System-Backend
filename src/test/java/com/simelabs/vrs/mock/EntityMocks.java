@@ -3,6 +3,7 @@ package com.simelabs.vrs.mock;
 import com.simelabs.vrs.entity.EventEntity;
 import com.simelabs.vrs.entity.UserEntity;
 import com.simelabs.vrs.entity.VenueEntity;
+import com.simelabs.vrs.model.UserModel;
 import com.simelabs.vrs.request.UserRequest;
 import com.simelabs.vrs.response.BaseResponse;
 
@@ -42,6 +43,14 @@ public class EntityMocks {
 		userRequest.setEmail("rahukek@gmail.com");
 		userRequest.setPhoneNumber("1234567890");
 		return userRequest;
+	}
+
+	public static UserModel getUserModel() {
+		UserModel userModel = new UserModel();
+		userModel.setFullName("Rahul EK");
+		userModel.setEmail("rahukek@gmail.com");
+		userModel.setPhoneNumber("1234567890");
+		return userModel;
 	}
 
 	public static List<VenueEntity> getVenueEntityList() {
